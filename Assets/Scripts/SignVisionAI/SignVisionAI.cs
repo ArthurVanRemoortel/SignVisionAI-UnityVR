@@ -106,7 +106,6 @@ namespace SignVisionAI
                 var leftInBounds = rotatedDetectionBounds.Contains(LeftHand.Wrist.transform.position);
                 var rightInBounds = rotatedDetectionBounds.Contains(RightHand.Wrist.transform.position);
                 var mouthPosition = rotatedDetectionBounds.NormalizedPositionInBounds(MouthTransform.position);
-                
                 if (leftInBounds || rightInBounds)
                 {
                     if (!IsRecording)

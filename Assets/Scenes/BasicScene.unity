@@ -515,6 +515,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3711799367079663623, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
+      propertyPath: m_UIScrollingEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3711799367079663623, guid: 895f6f3c2d334633b5800312285058d2, type: 3}
       propertyPath: m_SmoothMotionEnabled
       value: 1
       objectReference: {fileID: 0}
@@ -2143,10 +2147,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SignLanguage: VGT
   VRCamera: {fileID: 1463988885}
-  YOffset: 0.168
-  BoxWidth: 1.774
-  BoxHeight: 0.909
-  BoxDepth: 1.051
+  YOffset: 0.182
+  BoxWidth: 1.528
+  BoxHeight: 0.807
+  BoxDepth: 1.523
   SamplesPerSeconds: 30
   MouthTransform: {fileID: 1184673159}
   LeftHand:

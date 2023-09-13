@@ -2,6 +2,7 @@
 using System.Reflection;
 using UnityEngine;
 using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace SignVisionAI.Data
 {
@@ -66,34 +67,33 @@ namespace SignVisionAI.Data
 
         public HandFrame(Hand hand, RotatedBounds detectionBounds)
         {
-            var values = new List<Coordinate>();
+            var values = new Dictionary<string, Coordinate>();
             foreach (FieldInfo field in hand.GetFields())
             {
-                GameObject fieldValue = (GameObject) field.GetValue(hand);
-                Vector3 fieldPosition = fieldValue.transform.position;
+                var fieldValue = (GameObject) field.GetValue(hand);
+                var fieldName = Regex.Replace(field.Name, @"(\p{Lu})", "_$1").ToUpper().Substring(1);
+                var fieldPosition = fieldValue.transform.position;
                 if (fieldPosition == Vector3.zero)
                 {
-                    values.Add(new Coordinate(null, null, null));
+                    values.Add(fieldName, new Coordinate(null, null, null));
                 }
                 else
                 {
                     var positionWithingBounds = detectionBounds.NormalizedPositionInBounds(fieldPosition);
-                    positionWithingBounds.y = 1 - positionWithingBounds.y;
-                    Debug.Log(positionWithingBounds.x + ", " + positionWithingBounds.y);
-                    values.Add(new Coordinate(positionWithingBounds));   
+                    values.Add(fieldName, new Coordinate(positionWithingBounds));   
                 }
             }
-            WRIST = values[0];
-            THUMB_TIP = values[1];
-            THUMB_BASE = values[2];
-            INDEX_TIP = values[3];
-            INDEX_BASE = values[4];
-            MIDDLE_TIP = values[5];
-            MIDDLE_BASE = values[6];
-            RING_TIP = values[7];
-            RING_BASE = values[8];
-            PINKY_TIP = values[9];
-            PINKY_BASE = values[10];
+            WRIST = values["WRIST"];
+            THUMB_TIP = values["THUMB_TIP"];
+            THUMB_BASE = values["THUMB_BASE"];
+            INDEX_TIP = values["INDEX_TIP"];
+            INDEX_BASE = values["INDEX_BASE"];
+            MIDDLE_TIP = values["MIDDLE_TIP"];
+            MIDDLE_BASE = values["MIDDLE_BASE"];
+            RING_TIP = values["RING_TIP"];
+            RING_BASE = values["RING_BASE"];
+            PINKY_TIP = values["PINKY_TIP"];
+            PINKY_BASE = values["PINKY_BASE"];
         }
     }
 }

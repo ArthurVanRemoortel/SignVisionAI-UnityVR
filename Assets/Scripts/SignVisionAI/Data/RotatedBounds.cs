@@ -51,7 +51,7 @@ namespace SignVisionAI.Data
             var depthDistance = Vector3.Dot(relativePosition, rotation * Vector3.forward);
             return new Vector3(
                 Mathf.Clamp01(horizontalDistance / this.size.x),
-                Mathf.Clamp01(verticalDistance / this.size.y),
+                1 - Mathf.Clamp01(verticalDistance / this.size.y),
                 Mathf.Clamp01(depthDistance / this.size.z)
             );
         }
